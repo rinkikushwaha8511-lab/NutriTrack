@@ -59,28 +59,63 @@ const isRestricted = (food, preference) => {
 };
 
 /**
- * Assigns food items to appropriate meal slots
+ * Assigns food items to appropriate meal slots — strict keyword matching only.
+ * No calorie-range fallbacks to prevent same food appearing in all slots.
  */
 const fitsMealSlot = (food, mealSlot) => {
     const nameLower = food.name.toLowerCase();
     const catLower = (food.category || '').toLowerCase();
 
-    const breakfastItems = ['poha', 'upma', 'idli', 'dosa', 'paratha', 'oats', 'egg', 'omelette', 'toast', 'bread', 'pancake', 'banana', 'apple', 'milk', 'muesli', 'dhokla', 'sprouts', 'cheela', 'sandwich'];
-    const lunchItems = ['roti', 'rice', 'dal', 'paneer', 'chicken', 'curry', 'sabzi', 'khichdi', 'chapati', 'biryani', 'rajma', 'chole', 'fish', 'salad', 'thali'];
-    const dinnerItems = ['roti', 'dal', 'paneer', 'soup', 'khichdi', 'curry', 'sabzi', 'salad', 'tofu', 'chicken', 'fish', 'chapati', 'dalia'];
-    const snackItems = ['fruit', 'apple', 'banana', 'nuts', 'almond', 'walnut', 'chana', 'makhana', 'biscuit', 'tea', 'coffee', 'smoothie', 'juice', 'yogurt', 'curd', 'sprouts', 'peanut', 'snack', 'bhel'];
+    // Strict, non-overlapping keyword lists per meal
+    const breakfastKeywords = [
+        'poha', 'upma', 'idli', 'dosa', 'paratha', 'oats', 'omelette',
+        'toast', 'pancake', 'muesli', 'dhokla', 'cheela', 'cornflakes',
+        'breakfast', 'porridge', 'granola', 'besan chilla', 'uttapam',
+        'smoothie', 'sprouts', 'flaxseed', 'chia'
+    ];
+
+    const lunchKeywords = [
+        'roti', 'rice', 'biryani', 'rajma', 'chole', 'thali',
+        'chapati', 'pulao', 'fried rice', 'naan', 'puri',
+        'kadhi', 'sambar', 'rasam', 'baingan', 'aloo',
+        'lunch', 'grain', 'lentil'
+    ];
+
+    const dinnerKeywords = [
+        'soup', 'dalia', 'khichdi', 'dal', 'paneer', 'tofu',
+        'sabzi', 'curry', 'stew', 'grilled', 'stir fry',
+        'dinner', 'quinoa', 'vegetable', 'salad', 'broth'
+    ];
+
+    const snackKeywords = [
+        'fruit', 'apple', 'banana', 'orange', 'mango', 'papaya',
+        'nuts', 'almond', 'walnut', 'cashew', 'peanut', 'pista',
+        'chana', 'makhana', 'murmura', 'bhel', 'biscuit',
+        'tea', 'coffee', 'juice', 'yogurt', 'curd', 'lassi',
+        'snack', 'bar', 'protein bar', 'energy bar', 'roasted'
+    ];
+
+    // Category shortcuts
+    const breakfastCats = ['breakfast', 'cereal'];
+    const lunchCats = ['main course', 'grain', 'rice', 'bread'];
+    const dinnerCats = ['soup', 'curry', 'vegetable', 'protein'];
+    const snackCats = ['snack', 'fruit', 'nuts', 'dairy', 'beverage'];
 
     if (mealSlot === 'Breakfast') {
-        return breakfastItems.some(k => nameLower.includes(k)) || catLower.includes('breakfast') || (food.calories >= 100 && food.calories <= 450);
+        return breakfastKeywords.some(k => nameLower.includes(k)) ||
+               breakfastCats.some(c => catLower.includes(c));
     }
     if (mealSlot === 'Lunch') {
-        return lunchItems.some(k => nameLower.includes(k)) || catLower.includes('main') || catLower.includes('grain') || food.calories >= 150;
+        return lunchKeywords.some(k => nameLower.includes(k)) ||
+               lunchCats.some(c => catLower.includes(c));
     }
     if (mealSlot === 'Dinner') {
-        return dinnerItems.some(k => nameLower.includes(k)) || catLower.includes('main') || food.calories >= 120;
+        return dinnerKeywords.some(k => nameLower.includes(k)) ||
+               dinnerCats.some(c => catLower.includes(c));
     }
     if (mealSlot === 'Snacks') {
-        return snackItems.some(k => nameLower.includes(k)) || catLower.includes('snack') || catLower.includes('fruit') || food.calories <= 300;
+        return snackKeywords.some(k => nameLower.includes(k)) ||
+               snackCats.some(c => catLower.includes(c));
     }
 
     return true;

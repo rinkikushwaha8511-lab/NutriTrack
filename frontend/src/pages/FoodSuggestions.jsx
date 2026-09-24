@@ -228,13 +228,13 @@ const FoodSuggestions = () => {
                                                 "{food.reason}"
                                             </div>
 
-                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '0.85rem', marginBottom: '15px', background: '#181818', padding: '10px', borderRadius: '6px' }}>
-                                                <div><strong>Calories:</strong> {food.calories} kcal</div>
-                                                <div><strong>Protein:</strong> {food.protein}g</div>
-                                                <div><strong>Carbs:</strong> {food.carbohydrates}g</div>
-                                                <div><strong>Fats:</strong> {food.fats}g</div>
-                                                <div><strong>Fiber:</strong> {food.fiber}g</div>
-                                                <div><small>per {food.servingSize} {food.servingUnit}</small></div>
+                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '15px' }}>
+                                                <span style={{ background: 'rgba(255,87,34,0.2)', border: '1px solid #ff5722', color: '#ff8a65', padding: '3px 10px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: 'bold' }}>🔥 {food.calories} kcal</span>
+                                                <span style={{ background: 'rgba(33,150,243,0.2)', border: '1px solid #2196f3', color: '#64b5f6', padding: '3px 10px', borderRadius: '20px', fontSize: '0.78rem' }}>💪 {food.protein}g P</span>
+                                                <span style={{ background: 'rgba(76,175,80,0.2)', border: '1px solid #4caf50', color: '#81c784', padding: '3px 10px', borderRadius: '20px', fontSize: '0.78rem' }}>🌾 {food.carbohydrates}g C</span>
+                                                <span style={{ background: 'rgba(255,193,7,0.2)', border: '1px solid #ffc107', color: '#ffd54f', padding: '3px 10px', borderRadius: '20px', fontSize: '0.78rem' }}>🧈 {food.fats}g F</span>
+                                                {food.fiber > 0 && <span style={{ background: 'rgba(156,39,176,0.2)', border: '1px solid #9c27b0', color: '#ce93d8', padding: '3px 10px', borderRadius: '20px', fontSize: '0.78rem' }}>🌿 {food.fiber}g Fiber</span>}
+                                                <span style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid #555', color: '#aaa', padding: '3px 10px', borderRadius: '20px', fontSize: '0.72rem' }}>per {food.servingSize}{food.servingUnit}</span>
                                             </div>
 
                                             {selectedFood?._id === food._id && mealType === slotKey.charAt(0).toUpperCase() + slotKey.slice(1) ? (
@@ -303,13 +303,13 @@ const FoodSuggestions = () => {
                                                 "{food.reason}"
                                             </div>
 
-                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '0.85rem', marginBottom: '15px', background: '#181818', padding: '10px', borderRadius: '6px' }}>
-                                                <div><strong>Calories:</strong> {food.calories} kcal</div>
-                                                <div><strong>Protein:</strong> {food.protein}g</div>
-                                                <div><strong>Carbs:</strong> {food.carbohydrates}g</div>
-                                                <div><strong>Fats:</strong> {food.fats}g</div>
-                                                <div><strong>Fiber:</strong> {food.fiber}g</div>
-                                                <div><small>per {food.servingSize} {food.servingUnit}</small></div>
+                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '15px' }}>
+                                                <span style={{ background: 'rgba(255,87,34,0.2)', border: '1px solid #ff5722', color: '#ff8a65', padding: '3px 10px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: 'bold' }}>🔥 {food.calories} kcal</span>
+                                                <span style={{ background: 'rgba(33,150,243,0.2)', border: '1px solid #2196f3', color: '#64b5f6', padding: '3px 10px', borderRadius: '20px', fontSize: '0.78rem' }}>💪 {food.protein}g P</span>
+                                                <span style={{ background: 'rgba(76,175,80,0.2)', border: '1px solid #4caf50', color: '#81c784', padding: '3px 10px', borderRadius: '20px', fontSize: '0.78rem' }}>🌾 {food.carbohydrates}g C</span>
+                                                <span style={{ background: 'rgba(255,193,7,0.2)', border: '1px solid #ffc107', color: '#ffd54f', padding: '3px 10px', borderRadius: '20px', fontSize: '0.78rem' }}>🧈 {food.fats}g F</span>
+                                                {food.fiber > 0 && <span style={{ background: 'rgba(156,39,176,0.2)', border: '1px solid #9c27b0', color: '#ce93d8', padding: '3px 10px', borderRadius: '20px', fontSize: '0.78rem' }}>🌿 {food.fiber}g Fiber</span>}
+                                                <span style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid #555', color: '#aaa', padding: '3px 10px', borderRadius: '20px', fontSize: '0.72rem' }}>per {food.servingSize}{food.servingUnit}</span>
                                             </div>
 
                                             {selectedFood?._id === food._id ? (
